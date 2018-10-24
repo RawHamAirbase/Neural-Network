@@ -77,34 +77,41 @@ for j in range(60000):
 print('Now I will give you the opportunity to try it out yourself!')
 print('Just type the value and hit enter.')
 
+def TheSauce():
+    while True:
+        try:
+            ud1 = int(input('First value?:'))
+            assert -1 < ud1 < 2
+            ud2 = int(input('Second value?:'))
+            assert -1 < ud2 < 2
+            ud3 = int(input('Third value?:'))
+            assert -1 < ud3 < 2
+        except:
+            print('Invalid input. Please type a 0 or 1')
+            continue
+        ud = str([ud1, ud2, ud3])
+        print("Your input set is " + ud)
+        usin = nonlin(np.dot(np.array([ud1, ud2, ud3]), syn0))
+        usin2 = nonlin(np.dot(usin , syn1))
+        usin3 = nonlin(np.dot(usin2 , syn2))
+        print('Output for '+ ud + ' --->' + str(np.round_(usin3)))
+        break
+TheSauce()
 while True:
-    try:
-        ud1 = int(input('First value?:'))
-        assert -1 < ud1 < 2
-        ud2 = int(input('Second value?:'))
-        assert -1 < ud2 < 2
-        ud3 = int(input('Third value?:'))
-        assert -1 < ud3 < 2
-    except:
-        print('Invalid input. Please type a 0 or 1')
-        continue
-    ud = str([ud1, ud2, ud3])
-    print("Your input set is " + ud)
-    usin = nonlin(np.dot(np.array([ud1, ud2, ud3]), syn0))
-    usin2 = nonlin(np.dot(usin , syn1))
-    usin3 = nonlin(np.dot(usin2 , syn2))
-    print('Output for '+ ud + ' --->' + str(np.round_(usin3)))
     print('Would you like to try again?')
     try:
-        rep = input('Type yes/no:')
-        if rep == 'yes':
+        rep = input('Type y/n:')
+        if rep == 'y':
+            TheSauce()
             continue
-        elif rep == 'no':
+        elif rep == 'n':
+            print('Leaving neural network')
             break
         else:
-            print('Input not recognised, leaving neural network.')
-            break
+            print('Input not recognised, type y/n')
+            continue
     except:
-        print('Input not recognised, leaving neural network.')
-        break
+        print('Input not recognised, type y/n')
+        continue
+print('Thank you for trying! \nBy Abhiram Eswara')
 input('Press enter to finish:')
